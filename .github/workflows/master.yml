@@ -23,8 +23,8 @@ jobs:
           repo_name: ${{ github.event.repository.name }}
         run: |
           #check if ecr repo exists
-          exists=$(aws ecr describe-repositories --repository-name $repo_name 2> /dev/null) | true
-          if [ -n $exists ]
+          exists=$(aws ecr describe-repositories --repository-name $repo_name 2> /dev/null) || true
+          if [ -n "$exists" ]
           then
             echo "ECR exists"
             exit 0
